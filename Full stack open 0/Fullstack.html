@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekstin Tallennus</title>
+    <style>
+        /* Perusmuotoilu boksille, napille ja tallennetuille teksteille */
+        #inputText {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .saved-item {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .bullet {
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Kirjoita ja tallenna tekstiä</h2>
+
+    <!-- Tekstiboksi ja tallenna-painike -->
+    <textarea id="inputText" rows="3" placeholder="Kirjoita teksti tähän..."></textarea><br>
+    <button onclick="saveText()">Tallenna</button>
+
+    <!-- Tallennettujen tekstien näyttöalue -->
+    <div id="savedTexts"></div>
+
+    <script>
+        // Funktio tallentamaan teksti ja näyttämään sen tallennettujen tekstien alueella
+        function saveText() {
+            const text = document.getElementById("inputText").value;
+            if (text.trim() === "") return; // Estetään tyhjän tekstin tallennus
+
+            // Luo uusi tallennettu tekstikohde mustalla pallolla
+            const savedItem = document.createElement("div");
+            savedItem.classList.add("saved-item");
+
+            const bullet = document.createElement("span");
+            bullet.classList.add("bullet");
+
+            const textNode = document.createElement("span");
+            textNode.innerText = text;
+
+            // Lisätään musta pallo ja teksti tallennettujen tekstien alueelle
+            savedItem.appendChild(bullet);
+            savedItem.appendChild(textNode);
+
+            document.getElementById("savedTexts").appendChild(savedItem);
+
+            // Tyhjennetään tekstiboksi
+            document.getElementById("inputText").value = "";
+        }
+    </script>
+
+</body>
+</html>
